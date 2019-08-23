@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+          name="viewport">
+    <title>Demo</title>
+    <style>
+        html, body, #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    <link href="./js/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- cesium container -->
+<div id="cesiumContainer"></div>
+<!-- Bootstap Treeviewer container -->
+<div class="disselectable treecontainer"
+     style=" overflow-y :auto;max-height: 600px;width:250px;position:absolute;left: 20px;top: 20px;z-index: 1061;">
+    <div id="tree" style="display: none;"></div>
+</div>
+</body>
+</html>
+<script data-main="./js/main.js" src="./js/lib/require.js"></script>
