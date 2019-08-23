@@ -7,14 +7,6 @@
 define(["jquery", "cesium", "config", "map", "bootstrap", "layer3d", "bootstrapswitch", "cache", "bim"], function (jquery, Cesium, config, map, bootstrap, layer3d, bootstrapswitch, cache, bim) {
 
     var widgets = {
-        _floorLayerCheck: false,
-        _layerShowCheck: [],
-        _treeData: null,
-        _sidebar: false,
-        _nodeData: null,
-        _activemodel: [],
-        _handlerPolygon: null,
-        _nodeActive: false,
 
         init: function () {
             var me = this;
@@ -117,39 +109,7 @@ define(["jquery", "cesium", "config", "map", "bootstrap", "layer3d", "bootstraps
                 map.viewer.scene.layers.removeAll();
                 var promise = bim.addBIMFromUrl("http://47.97.163.110:8090/iserver/services/3D-WTC/rest/realspace", "http://47.97.163.110:8090/iserver/services/data-WTC/rest/data", 120.188, 30.231);
                 promise.then(function (layers) {
-                    //将BIM图层存入缓存
-                    cache.put('BIMlayers', layers);
 
-                    //BIM透明度控制
-                    $('#TotalAlpha').bind('input propertychange', function () {
-                        var alpha = $(this).val();
-                        for (var k in layers) {
-                            if (layers[k].name.split('@')[0] === 'stair') {
-                                continue;
-                            }
-                            layers[k].style3D.fillForeColor = new Cesium.Color(1.0, 1.0, 1.0, alpha);
-                        }
-                    });
-
-                    $('.bimtoolbar .panel-body').append('<hr style="height: 1px;background-color: black;"/><div id="layersList"></div>');
-                    var $layersList = $('.bimtoolbar #layersList');
-                    var html = '<ul>';
-                    for (var b = 0; b < layers.length; b++) {
-                        var name = layers[b].name.split('@')[0];
-                        html += '<li class=><label><input type="checkbox" layerindex="' + b + '" checked="checked">' + name + '</label></li>';
-                    }
-                    html += '</ul>';
-                    $layersList.append(html);
-                    //图层控制
-                    $('.bimtoolbar #layersList input[type="checkbox"]').change(function () {
-                        var checked = $(this).prop("checked");
-                        var layerindex = $(this).attr("layerindex");
-                        if (checked) {
-                            layers[layerindex].visible = true;
-                        } else {
-                            layers[layerindex].visible = false;
-                        }
-                    });
                 }, function (e) {
                     //promise回调异常
                 });
@@ -163,7 +123,7 @@ define(["jquery", "cesium", "config", "map", "bootstrap", "layer3d", "bootstraps
         /**
          * 唯一化模块标识
          */
-        modulename: "widgets",
+        modulename: "widgets"
     };
 
     widgets.init();
